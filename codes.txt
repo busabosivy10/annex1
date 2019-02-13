@@ -1,0 +1,50 @@
+Private Sub addnew_OnClick()
+rs.addnew
+Clear
+End Sub
+Sub Clear()
+text1.text = ""
+Text2.text = ""
+DTPicker1.Value = "10/05/2005"
+Option1.Value = False
+Option2.Value = False
+Combo1.text = "Select Department"
+Combo2.text = "Select Course"
+Combo3.text = "Select Semester"
+Text3.text = ""
+Text4.text = ""
+Picture1.Picture = LoadPicture("")
+End Sub
+Sub Clear()
+text1.text = ""
+Text2.text = ""
+Text3.text = ""
+Text4.text = ""
+Text5.text = ""
+Text6.text = ""
+Text7.text = ""
+Text8.text = ""
+Text9.text = ""
+End Sub
+Private Sub deletebtn_Click()
+confirm = MsgBox("Do you want to delete the Student Profile", vbYesNo + vbCritical, "Deletion Confirmation")
+If confirm = vbYes Then
+rs.Delete adAffectCurrent
+MsgBox "Record has been Deleted successfully", vbInformation, "Message"
+rs.Update
+refreshdata
+Else
+MsgBox "Profile Not Deleted ..!!", vbInformation, "Message"
+End If
+
+End Sub
+Sub refreshdata()
+rs.Close
+rs.Open "Select * from ProfileTBL", Con, adOpenStatic, adLockPessimistic
+If Not rs.EOF Then
+rs.MoveNext
+display
+Else
+MsgBox "No Record Found"
+End If
+End Sub
